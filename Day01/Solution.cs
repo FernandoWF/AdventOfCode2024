@@ -4,11 +4,11 @@ internal sealed class Solution : ISolution
 {
     public static object RunPart1(string input)
     {
-        return null!;
+        return string.Empty;
     }
 
     public static object RunPart2(string input)
     {
-        return null!;
+        return string.Empty;
     }
 }

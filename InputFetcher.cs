@@ -4,7 +4,7 @@ internal static class InputFetcher
 {
     public static async Task<string> Fetch<TDay>() where TDay : ISolution
     {
-        var inputsFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Inputs");
+        var inputsFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input Files");
         var day = typeof(TDay).Namespace!.Split('.').Last();
         var inputFilePath = Path.Combine(inputsFolderPath, $"{day}.txt");
 
@@ -14,6 +14,13 @@ internal static class InputFetcher
         }
 
         var sessionCookieFilePath = Path.Combine(inputsFolderPath, "Session Cookie.txt");
+        if (!File.Exists(sessionCookieFilePath))
+        {
+            Directory.CreateDirectory(inputsFolderPath);
+            File.Create(sessionCookieFilePath).Close();
+            throw new Exception($"Missing session cookie.");
+        }
+
         var sessionCookie = await File.ReadAllTextAsync(sessionCookieFilePath);
 
         var dayNumber = day[^2..].TrimStart('0');
