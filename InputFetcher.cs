@@ -2,7 +2,7 @@
 
 internal static class InputFetcher
 {
-    public static async Task<string> Fetch<TDay>() where TDay : ISolution
+    public static async Task<Input> Fetch<TDay>() where TDay : ISolution
     {
         var inputsFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input Files");
         var day = typeof(TDay).Namespace!.Split('.').Last();
@@ -10,7 +10,7 @@ internal static class InputFetcher
 
         if (File.Exists(inputFilePath))
         {
-            return await File.ReadAllTextAsync(inputFilePath);
+            return new Input(await File.ReadAllTextAsync(inputFilePath));
         }
 
         var sessionCookieFilePath = Path.Combine(inputsFolderPath, "Session Cookie.txt");
@@ -24,11 +24,11 @@ internal static class InputFetcher
         var sessionCookie = await File.ReadAllTextAsync(sessionCookieFilePath);
 
         var dayNumber = day[^2..].TrimStart('0');
-        var input = await FetchFromWebsite($"https://adventofcode.com/2024/day/{dayNumber}/input", sessionCookie);
+        var inputText = await FetchFromWebsite($"https://adventofcode.com/2024/day/{dayNumber}/input", sessionCookie);
 
-        await File.WriteAllTextAsync(inputFilePath, input);
+        await File.WriteAllTextAsync(inputFilePath, inputText);
 
-        return input;
+        return new Input(inputText);
     }
 
     private static async Task<string> FetchFromWebsite(string url, string sessionCookie)
