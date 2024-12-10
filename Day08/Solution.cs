@@ -4,7 +4,7 @@ internal sealed class Solution : ISolution
 {
     public static object RunPart1(Input input)
     {
-        var map = input.ToSquareMatrix();
+        var map = input.ToRectangularMatrix();
 
         var antennas = map
             .Where(tuple => tuple.Value != '.')
@@ -41,7 +41,7 @@ internal sealed class Solution : ISolution
 
     public static object RunPart2(Input input)
     {
-        var map = input.ToSquareMatrix();
+        var map = input.ToRectangularMatrix();
 
         var antennas = map
             .Where(tuple => tuple.Value != '.')

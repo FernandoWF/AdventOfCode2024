@@ -4,7 +4,7 @@ internal sealed class Solution : ISolution
 {
     public static object RunPart1(Input input)
     {
-        var matrix = input.ToSquareMatrix();
+        var matrix = input.ToRectangularMatrix();
 
         return matrix
             .SelectMany(tuple => XmasSearcher.Search(matrix, tuple.X, tuple.Y))
@@ -13,7 +13,7 @@ internal sealed class Solution : ISolution
 
     public static object RunPart2(Input input)
     {
-        var matrix = input.ToSquareMatrix();
+        var matrix = input.ToRectangularMatrix();
 
         return matrix.Count(tuple => X_MasSearcher.Search(matrix, tuple.X, tuple.Y));
     }

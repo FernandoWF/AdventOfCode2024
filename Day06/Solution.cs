@@ -6,7 +6,7 @@ internal sealed class Solution : ISolution
 {
     public static object RunPart1(Input input)
     {
-        var lab = input.ToSquareMatrix();
+        var lab = input.ToRectangularMatrix();
         var guardStartingPosition = GetGuardStartingPosition(lab);
 
         return GetVisitedPositions(guardStartingPosition, lab, out _)
@@ -79,7 +79,7 @@ internal sealed class Solution : ISolution
 
     public static object RunPart2(Input input)
     {
-        var lab = input.ToSquareMatrix();
+        var lab = input.ToRectangularMatrix();
         var guardStartingPosition = GetGuardStartingPosition(lab);
         var visitedPositions = GetVisitedPositions(guardStartingPosition, lab, out _);
         var newObstructionPositions = visitedPositions

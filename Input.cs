@@ -8,7 +8,7 @@
 
     internal static class InputTransformationExtensions
     {
-        public static Matrix<char> ToSquareMatrix(this Input input)
+        public static Matrix<char> ToRectangularMatrix(this Input input)
         {
             var height = input.Lines.Length;
             var width = input.Lines[0].Length;
